@@ -16,7 +16,7 @@
     "url": "https://github.com/Iryna-Holova/neo-design-patterns-hw-09/issues"
   },
   "homepage": "https://github.com/Iryna-Holova/neo-design-patterns-hw-09#readme",
-  "description": "",
+  "description": "Pattern Template Method is implemented through the base class `DataExporter`, which defines a fixed export algorithm. Each format (CSV, JSON, XML) is a separate subclass that implements formatting and saving.",
   "devDependencies": {
     "@types/node": "^25.9.3",
     "ts-node": "^10.9.2",
