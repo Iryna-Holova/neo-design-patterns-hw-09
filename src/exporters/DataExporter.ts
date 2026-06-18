@@ -6,15 +6,37 @@ export abstract class DataExporter {
   protected result: string = '';
 
   public async export() {
-    // TODO: Implement export logic
+    await this.load();
+    this.transform();
+    this.beforeRender();
+    this.result += this.render();
+    this.afterRender();
+    this.save();
   }
 
   protected async load() {
-    // TODO: Implement load logic
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/users',
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      this.data = (await response.json()) as UserData[];
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   }
 
   protected transform() {
-    // TODO: Implement transform logic
+    this.data = this.data
+      .map(({ id, name, email, phone }) => ({
+        id,
+        name,
+        email,
+        phone,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   protected beforeRender() {
